@@ -30,6 +30,22 @@ app.use('/api/user', require('./routes/user'));
 app.use('/api/artist', require('./routes/artist'));
 app.use('/api/admin', require('./routes/admin'));
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'SpotMYstar API',
+    status: 'running',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      user: '/api/user',
+      artist: '/api/artist',
+      admin: '/api/admin'
+    }
+  });
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
